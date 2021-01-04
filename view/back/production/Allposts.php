@@ -75,8 +75,8 @@
                   <li><a><i class="fa fa-desktop"></i>Blog <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                    <li><a href="view\back\production\Allposts.php">All Posts</a></li>
-                      <li><a href="view\back\production\Post-new.php">Add New</a></li> 
+                    <li><a href="Allposts.php">All Posts</a></li>
+                      <li><a href="Post-new.php">Add New</a></li> 
                       <li><a href="invoice.html">Categories</a></li> 
                       <li><a href="calendar.html">Add Categorie </a></li>
                     </ul>
@@ -205,7 +205,66 @@
                 </div>
 
                <!-- INSERT CODE HERE--> 
+               <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">article</a>
+        </li>
+        <li class="breadcrumb-item active">listes des articles</li>
+      </ol>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Liste des Articles</div>
+        <div class="card-body">
+                     
+              <div class="table-responsive">
 
+       <table class="table table-bordered" id="dataTable" name="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>date d'ajout</th>
+            <th>titre</th>
+                       <th>description</th>
+			                   	  <th>image</th>
+             <th>Modification</th>
+       <th>Supression</th>
+    </tr>
+</thead>
+ <tbody>
+                                             <?php
+                                    include "../../model/Post.php";
+		                                       	 require '../../controller/PostC.php';
+		                                               	$a=new articleC();
+		                                 	$liste1=$a->affiche_a();
+                                          foreach ($liste1 as $emp) {
+
+                                          ?>
+                                   <tr>
+                                 <td><?php echo $emp['added_on']; ?></td>
+                          <td><?php echo $emp['post_id']; ?></td>
+                     <td><?php echo $emp['title']; ?></td>
+                     <td><?php echo $emp['description']; ?></td>
+                     <td><img class="" width="100" height="100" src="../../entities/image/<?php echo $emp['image']; ?>"></td>
+                    <!--ajouter user et categorie -->
+	                 <td><a href="edit-post?added _on=<?PHP echo $emp['added_on']; ?>">Modifier</a></td>
+	                <td><a href="delete-post? title=<?PHP echo $emp['title']; ?>">supprimer</a></td>
+
+                      </tr>
+			 
+                  <?php
+              }
+              ?>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+    </div>
+<!-- fin CODE -->
                 <div class="clearfix"></div>
               </div>
             </div>

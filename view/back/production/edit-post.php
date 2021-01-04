@@ -1,3 +1,23 @@
+<?PHP
+include "../../model/postC.php";
+include "../../controller/post.php";
+
+if (isset($_GET['added_on'])){
+    $aC =new postC();
+    echo "1";
+    $result=$aC->recupererpost($_GET['added_on']);
+    echo "1";
+    foreach($result as $emp){
+        $added_on=$emp['added_on'];
+        $title=$emp['title'];
+        $description=$emp['description'];
+        $image=$emp['image'];
+        $post_id=$emp['post_id']
+    }
+}
+else echo"error";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,6 +27,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" href="images/ahmed.ico" type="image/ico" />
+    <script src="//cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 
     <title>Atlas! | </title>
 
@@ -205,6 +226,65 @@
                 </div>
 
                <!-- INSERT CODE HERE--> 
+
+               <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="#">produits</a>
+            </li>
+            <li class="breadcrumb-item active">Modifier post</li>
+        </ol>
+        <!-- Example DataTables Card-->
+        <div class="card card-register mx-auto mt-5">
+            <div class="card-header">Modifier post</div>
+            <div class="card-body">
+                <form method="POST" action="modifArt.php" >
+                    <div class="form-group">
+                        <div class="form-row">
+
+                            <label for="exampleInputName">date ajout</label>
+                            <input class="form-control" name="date_a" type="date"  value="" required>
+
+                        </div>
+                        <div class="form-row">
+
+                            <label for="exampleInputLastName">titre</label>
+                            <input class="form-control" name="titre"  type="text"   value=""   required>
+
+                        </div>
+
+                        <div class="form-row">
+                        <label for="exampleInputEmail1">description</label>
+                        <textarea name="editor1"></textarea>
+                        
+                    </div>
+                    <script src="ckeditor/ckeditor.js"></script>
+                    <script>CKEDITOR.replace("editor1");</script>
+                        </div>
+
+                        <div class="form-row">
+
+                            <label for="exampleInputPassword1">image</label>
+                            <input class="form-control" name="image" type="text"  value="" required>
+
+                        </div>
+                       
+                        <div class="form-row">
+                        <input class="form-control" type="hidden" name="date_a" value="">
+                        <input class="form-control" type="submit" name="modifier" value="modifier">
+                        </div>
+                    </div>
+            </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
 
                 <div class="clearfix"></div>
               </div>

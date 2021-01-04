@@ -75,8 +75,8 @@
                   <li><a><i class="fa fa-desktop"></i>Blog <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
-                    <li><a href="view\back\production\Allposts.php">All Posts</a></li>
-                      <li><a href="view\back\production\Post-new.php">Add New</a></li> 
+                    <li><a href="Allposts.php">All Posts</a></li>
+                      <li><a href="Post-new.php">Add New</a></li> 
                       <li><a href="invoice.html">Categories</a></li> 
                       <li><a href="calendar.html">Add Categorie </a></li>
                     </ul>
@@ -205,7 +205,49 @@
                 </div>
 
                <!-- INSERT CODE HERE--> 
+        <!-- Example DataTables Card-->
+        <div class="card card-register mx-auto mt-5">
+            <div class="card-header">Add Article</div>
+            <div class="card-body">
+                <form method="POST" action="formarticle.php" >
+                    <div class="form-group">
+                        <div class="form-row">
 
+                            <label for="exampleInputName">date d'ajout</label>
+                            <input class="form-control" name="date_a" type="date" aria-describedby="nameHelp"  required>
+
+                        </div>
+                        <div class="form-row">
+
+                            <label for="exampleInputLastName">title</label>
+                            <input class="form-control" name="titre"  type="text" aria-describedby="nameHelp"   required>
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+
+                        <label for="exampleInputEmail1">description</label>
+                        <textarea name="description"></textarea>
+                        
+                    </div>
+                    <script src="ckeditor/ckeditor.js"></script>
+                    <script>CKEDITOR.replace("description");</script>
+                    <div class="form-group">
+                        <div class="form-row">
+
+                            <label for="exampleInputPassword1">image</label>
+                            <input type="file" name="image" tabindex="4" accept="image/png, image/jpeg"   required>
+
+                        </div>
+                       
+                    </div>
+                    <input class="form-control" type="submit" name="ajouter" value="ajouter">
+                </form>
+            </div>
+
+
+        </div>
+ <!-- Finn CODE HERE--> 
                 <div class="clearfix"></div>
               </div>
             </div>
