@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname="travel_db";
+$dbname="phpsamples";
 
 
 $conn = mysqli_connect($servername, $username, $password,$dbname);
