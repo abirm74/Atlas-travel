@@ -1,7 +1,28 @@
-<?php  /////=> récupérer les données  à partir de la base pour faire l'affichage
-include "connexion.php"; // appeler la connexion
-$requete2="SELECT * FROM hotels"; // regroupement des données à partier de la base de données
-$res=$idcom->query($requete2);   ///exécution d'une requete
+<?php session_start();
+
+
+
+if(empty($_SESSION['currency']) || $_SESSION['currency']=="USD")
+{
+	$_SESSION['currency']="USD";
+	$_SESSION['c_from']= "BDT";
+	$_SESSION['c_to']= "USD";
+	$_SESSION['c_symbol']= "$";
+}
+else if($_SESSION['currency']=="BDT")
+{
+	$_SESSION['c_from']= "USD";
+	$_SESSION['c_to']= "BDT";
+    $_SESSION['c_symbol']= "৳";
+}	
+$price = $_SESSION['currency'];
+?>
+
+
+
+
+<?php  
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,71 +78,61 @@ $res=$idcom->query($requete2);   ///exécution d'une requete
 
     <div class="row">
       <div class="col-md-12">
-        <div class="x_panel">
-          <div class="x_title">
-           <center><h1 style="color: green;">Hotels</h1></center> 
-            <ul class="nav navbar-right panel_toolbox">
-             
-              
-              <li><a class="close-link"><i class="fa fa-close"></i></a>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-          </div>
+       
+          
           <div class="x_content">
-
-            
-
+          <main id="main">
             <!-- start project list -->
-            <table class="table table-striped projects" style="border-color: grey;border-style: solid;position:absolute;">
-              <thead>
-                <tr>
-                  <th style="width: 3%;border: solid;border-color: grey;">id_Hotel</th>
-                  <th style="width:35%;border: solid;border-color: grey;">Name</th>
-                  <th style="width:8%;border: solid;border-color: grey;">Etoile</th>
-                              <th style="width:8% ;border: solid;border-color: grey;">Total_Chambre</th>
-                              <th style="width:2%;border: solid;border-color: grey;">Number_chambre_Disponible</th>
-                              <th style="width:8%;border: solid;border-color: grey;">Phone_Number</th>
-                              <th style="width:13%;border: solid;border-color: grey;">statement</th>
-                </tr>
-              </thead>
-              <tbody>
-              <?php 
-  foreach($res->fetchAll(PDO::FETCH_ASSOC) as $hotel) /// parcourir la résultat du requete ligne par ligne 
-  /// affichage d'attribut à partir de la  base suivant l'objet déclaré exemple :<?php echo $hotel["name"]
-  { 
-                      ?>
-                <tr style="border: solid;border-color: grey;">
-                  <td style="border: solid;border-color: grey;"><?php echo $hotel["id_hotel"]?></td>
-                  <td style="border: solid;border-color: grey;">
-                  <?php echo $hotel["name"]?>
-                  </td>
-                  <td style="border: solid;border-color: grey;">
-                  <?php echo $hotel["etoile"]?>
-                  </td >
-                   <td style="border: solid;border-color: grey;">
-                   <?php echo $hotel["total_chambre"]?>
-                  </td>
-                  <td style="border: solid;border-color: grey;">
-                  <?php echo $hotel["nb_disponible"]?>
-                  </td>
-                  <td style="border: solid;border-color: grey;">
-                  <?php echo $hotel["phone"]?>
-                  </td>
-                  <td style="border: solid;border-color: grey;">
-                  <?php echo $hotel["statement"]?>
-                  </td>
-                 
-                  
-                  
-                  
-                
-                </tr>
-               
-                <?php } ?>
-                 
-            </tbody>
-            </table>
+            <section id="portfolio" class="portfolio">
+           <div class="container">
+
+                <div class="section-title" data-aos="fade-left">
+            <h2>Hotels</h2>
+             <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+              </div>
+
+   
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+      
+            
+            <?php  
+			include 'admin/Config/connexion.php';
+			include 'admin/Model/Hotel.php';
+			$h=new Hotel('', '', '', '', '', '', '', '');
+			$hotels=$h->index($cnx);
+             foreach($hotels as $row)
+			 { 
+			 $img = "notfound.jpg";
+			 if(!empty($row['photo']))
+				 $img = $row['photo'];
+			 ?>
+			 
+			 <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="admin/images/Hotels/<?php echo $img; ?>" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4><?php echo $row['name']; ?></h4>
+                <p>App</p>
+                <div class="portfolio-links">
+                  <a href="admin/images/Hotels/<?php echo $img; ?>" data-gall="portfolioGallery" class="venobox vbox-item" title="<?php echo $row['name']; ?>"><i class="bx bx-plus"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+			 
+			 <?php } ?>
+		                     			
+
+												                     		
+
+
+               </div>
+
+             </div>
+            </section>
+</main>
             <!-- end project list -->
 
           </div>
@@ -129,5 +140,19 @@ $res=$idcom->query($requete2);   ///exécution d'une requete
       </div>
     </div>
   </div>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+  <script src="assets/vendor/counterup/counterup.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/venobox/venobox.min.js"></script>
+  <script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
